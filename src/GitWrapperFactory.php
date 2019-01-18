@@ -48,7 +48,7 @@ class GitWrapperFactory
         
         if (value(Arr::get($config, 'auth')) === 'ssh_key') {
             if (! Arr::has($config, 'key_path')) {
-                throw new InvalidArgumentException('The gitwrapper factory requires a key_path path for the auth method "ssh_key".');
+                throw new InvalidArgumentException('The gitwrapper factory requires a key path for the auth method "ssh_key".');
             }
             
             $this->addSshKey($git, $config);
