@@ -34,9 +34,9 @@ This will create a `config/git.php` file in your app that you can modify to set 
 
 There are three configuration options:
 
-##### Logging
+##### Logger
 
-This option (`'logging'`) is where you can enable logging, and set which log channel or log channel stack to use. To enable logging using the default channel, simply set this option to `true`. If you want to log to a specific channel, provide the channel name. Lastly, if you want to log to a channel stack, provide an array of log channels to use.
+This option (`'logger'`) is where you can enable logging, and set which log channel or log channel stack to use. To enable logging using the default channel, simply set this option to `true`. If you want to log to a specific channel, provide the channel name. Lastly, if you want to log to a channel stack, provide an array of log channels to use.
 
 ##### Default Connection Name
 
