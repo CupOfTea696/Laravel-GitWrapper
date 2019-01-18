@@ -21,6 +21,16 @@
             "CupOfTea\\GitWrapper\\": "src/"
         }
     },
+    "require-dev": {
+        "graham-campbell/analyzer": "^2.1",
+        "graham-campbell/testbench": "^5.1",
+        "phpunit/phpunit": "^6.5|^7.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CupOfTea\\Tests\\GitWrapper\\": "tests/"
+        }
+    },
     "minimum-stability": "stable",
     "config": {
         "sort-packages": true
