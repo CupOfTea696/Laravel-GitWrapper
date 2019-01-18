@@ -61,7 +61,7 @@ class GitWrapperServiceProvider extends ServiceProvider
             return new GitWrapperFactory($this->app);
         });
         
-        $this->alias('git.factory', GitWrapperFactory::class);
+        $this->app->alias('git.factory', GitWrapperFactory::class);
     }
     
     /**
