@@ -82,7 +82,7 @@ class GitWrapperFactory
      * Add a logger to the GitWrapper instance.
      * 
      * @param \GitWrapper\GitWrapper $git
-     * @@param mixed $channel
+     * @param mixed $channel
      * 
      * @return void
      */

@@ -34,7 +34,7 @@ class GitWrapperManager extends AbstractManager
      *
      * @param array $config
      *
-     * @return \Gitwrapper\Gitwrapper
+     * @return \GitWrapper\GitWrapper
      */
     protected function createConnection(array $config)
     {
