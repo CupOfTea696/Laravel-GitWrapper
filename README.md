@@ -16,7 +16,7 @@ If you are not using automatic package discovery, you'll need to register the `C
 
 You can also optionally alias the facade by adding the following line to your `aliases` in `config/app.php`.
 
-```
+```php
         'Git' => CupOfTea\GitWrapper\Facades\Git::class,
 ```
 
