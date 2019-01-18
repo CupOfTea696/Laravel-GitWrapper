@@ -5,6 +5,7 @@ namespace CupOfTea\GitWrapper;
 use GitWrapper\GitWrapper;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Container\Container;
 use Laravel\Lumen\Application as LumenApplication;
 use Illuminate\Foundation\Application as LaravelApplication;
 
@@ -57,8 +58,8 @@ class GitWrapperServiceProvider extends ServiceProvider
      */
     public function registerFactory()
     {
-        $this->app->singleton('git.factory', function () {
-            return new GitWrapperFactory($this->app);
+        $this->app->singleton('git.factory', function (Container $app) {
+            return new GitWrapperFactory($app);
         });
         
         $this->app->alias('git.factory', GitWrapperFactory::class);
