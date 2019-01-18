@@ -71,7 +71,7 @@ class GitWrapperServiceProvider extends ServiceProvider
      */
     protected function registerManager()
     {
-        $this->app->singleton('github', function (Container $app) {
+        $this->app->singleton('git', function (Container $app) {
             $config = $app['config'];
             $factory = $app['git.factory'];
             
