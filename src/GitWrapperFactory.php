@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Illuminate\Contracts\Container\Container;
 use GitWrapper\Event\GitLoggerEventSubscriber;
+use Symfony\Component\Process\ExecutableFinder;
 
 class GitWrapperFactory
 {
@@ -40,7 +41,7 @@ class GitWrapperFactory
      */
     public function make(array $config)
     {
-        $git = new GitWrapper;
+        $git = new GitWrapper($this->getExecutable());
         
         if (! Arr::has($config, 'auth')) {
             throw new InvalidArgumentException('The gitwrapper factory requires an auth method.');
@@ -63,6 +64,16 @@ class GitWrapperFactory
         }
         
         return $git;
+    }
+    
+    /**
+     * Get the git executable.
+     * 
+     * @return string
+     */
+    protected function getExecutable()
+    {
+        return with(new ExecutableFinder)->find('git', 'git');
     }
     
     /**

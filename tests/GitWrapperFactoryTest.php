@@ -13,9 +13,16 @@ use GrahamCampbell\TestBench\AbstractTestCase as AbstractTestBenchTestCase;
 
 class GitWrapperFactoryTest extends AbstractTestBenchTestCase
 {
+    /**
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
     public function testMakeStandard()
     {
         $factory = $this->getFactory();
+        
+        $gitWrapper = Mockery::mock('overload:' . GitWrapper::class);
+        $gitWrapper->shouldReceive('__construct')->once()->with(Mockery::type('string'));
         
         $git = $factory[0]->make(['auth' => 'none']);
         
