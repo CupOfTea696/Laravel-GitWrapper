@@ -28,5 +28,5 @@ class GitWrapper implements PackageContract
      *
      * @const string
      */
-    const VERSION = '1.1.1';
+    const VERSION = '1.1.2';
 }
