@@ -33,20 +33,6 @@ class GitWrapperServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the factory class.
-     *
-     * @return void
-     */
-    public function registerFactory()
-    {
-        $this->app->singleton('git.factory', function (Container $app) {
-            return new GitWrapperFactory($app);
-        });
-
-        $this->app->alias('git.factory', GitWrapperFactory::class);
-    }
-
-    /**
      * Get the services provided by the provider.
      *
      * @return string[]
@@ -79,6 +65,20 @@ class GitWrapperServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register the factory class.
+     *
+     * @return void
+     */
+    protected function registerFactory()
+    {
+        $this->app->singleton('git.factory', function (Container $app) {
+            return new GitWrapperFactory($app);
+        });
+
+        $this->app->alias('git.factory', GitWrapperFactory::class);
+    }
+
+    /**
      * Register the manager class.
      *
      * @return void
@@ -103,6 +103,7 @@ class GitWrapperServiceProvider extends ServiceProvider
     protected function registerBindings()
     {
         $this->app->bind('git.connection', function (Container $app) {
+            /** @var \CupOfTea\GitWrapper\GitWrapperManager $manager */
             $manager = $app['git'];
 
             return $manager->connection();
