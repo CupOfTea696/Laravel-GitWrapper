@@ -9,7 +9,7 @@ use GrahamCampbell\Analyzer\AnalysisTrait;
 class AnalysisTest extends TestCase
 {
     use AnalysisTrait;
-    
+
     /**
      * Get the code paths to analyze.
      *
@@ -23,7 +23,7 @@ class AnalysisTest extends TestCase
             realpath(__DIR__),
         ];
     }
-    
+
     /**
      * Get the classes to ignore not existing.
      *

@@ -13,7 +13,7 @@ use CupOfTea\Tests\GitWrapper\AbstractTestCase;
 class GitTest extends AbstractTestCase
 {
     use FacadeTrait;
-    
+
     /**
      * Get the facade accessor.
      *
@@ -23,7 +23,7 @@ class GitTest extends AbstractTestCase
     {
         return 'git';
     }
-    
+
     /**
      * Get the facade class.
      *
@@ -33,7 +33,7 @@ class GitTest extends AbstractTestCase
     {
         return Git::class;
     }
-    
+
     /**
      * Get the facade root.
      *

@@ -3,7 +3,6 @@
 namespace CupOfTea\GitWrapper;
 
 use GitWrapper\GitWrapper;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Container\Container;
 use Laravel\Lumen\Application as LumenApplication;
@@ -20,25 +19,7 @@ class GitWrapperServiceProvider extends ServiceProvider
     {
         $this->setupConfig();
     }
-    
-    /**
-     * Setup the config.
-     *
-     * @return void
-     */
-    protected function setupConfig()
-    {
-        $source = realpath($raw = __DIR__ . '/../config/git.php') ?: $raw;
-        
-        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
-            $this->publishes([$source => config_path('git.php')], 'config');
-        } elseif ($this->app instanceof LumenApplication) {
-            $this->app->configure('git');
-        }
-        
-        $this->mergeConfigFrom($source, 'git');
-    }
-    
+
     /**
      * Register the service provider.
      *
@@ -50,7 +31,7 @@ class GitWrapperServiceProvider extends ServiceProvider
         $this->registerManager();
         $this->registerBindings();
     }
-    
+
     /**
      * Register the factory class.
      *
@@ -61,43 +42,10 @@ class GitWrapperServiceProvider extends ServiceProvider
         $this->app->singleton('git.factory', function (Container $app) {
             return new GitWrapperFactory($app);
         });
-        
+
         $this->app->alias('git.factory', GitWrapperFactory::class);
     }
-    
-    /**
-     * Register the manager class.
-     *
-     * @return void
-     */
-    protected function registerManager()
-    {
-        $this->app->singleton('git', function (Container $app) {
-            $config = $app['config'];
-            $factory = $app['git.factory'];
-            
-            return new GitWrapperManager($config, $factory);
-        });
-        
-        $this->app->alias('git', GitWrapperManager::class);
-    }
-    
-    /**
-     * Register the bindings.
-     *
-     * @return void
-     */
-    protected function registerBindings()
-    {
-        $this->app->bind('git.connection', function (Container $app) {
-            $manager = $app['git'];
-            
-            return $manager->connection();
-        });
-        
-        $this->app->alias('git.connection', GitWrapper::class);
-    }
-    
+
     /**
      * Get the services provided by the provider.
      *
@@ -110,5 +58,56 @@ class GitWrapperServiceProvider extends ServiceProvider
             'git',
             'git.connection',
         ];
+    }
+
+    /**
+     * Setup the config.
+     *
+     * @return void
+     */
+    protected function setupConfig()
+    {
+        $source = realpath($raw = __DIR__ . '/../config/git.php') ?: $raw;
+
+        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
+            $this->publishes([$source => config_path('git.php')], 'config');
+        } elseif ($this->app instanceof LumenApplication) {
+            $this->app->configure('git');
+        }
+
+        $this->mergeConfigFrom($source, 'git');
+    }
+
+    /**
+     * Register the manager class.
+     *
+     * @return void
+     */
+    protected function registerManager()
+    {
+        $this->app->singleton('git', function (Container $app) {
+            $config = $app['config'];
+            $factory = $app['git.factory'];
+
+            return new GitWrapperManager($config, $factory);
+        });
+
+        $this->app->alias('git', GitWrapperManager::class);
+    }
+
+    /**
+     * Register the bindings.
+     *
+     * @return void
+     */
+    protected function registerBindings()
+    {
+        $this->app->bind('git.connection', function (Container $app) {
+            $manager = $app['git'];
+
+            return $manager->connection();
+        });
+
+        $this->app->alias('git.connection', GitWrapper::class);
     }
 }

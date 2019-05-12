@@ -10,47 +10,25 @@ class GitWrapperManager extends AbstractManager
     /**
      * The factory instance.
      *
-     * @var \CupOfTea\GitWrapper\GitWrapperFactory 
+     * @var \CupOfTea\GitWrapper\GitWrapperFactory
      */
     protected $factory;
-    
+
     /**
      * Create a new github manager instance.
      *
-     * @param \Illuminate\Contracts\Config\Repository   $config
-     * @param \CupOfTea\GitWrapper\GitWrapperFactory    $factory
+     * @param  \Illuminate\Contracts\Config\Repository  $config
+     * @param  \CupOfTea\GitWrapper\GitWrapperFactory  $factory
      *
      * @return void
      */
     public function __construct(Repository $config, GitWrapperFactory $factory)
     {
         parent::__construct($config);
-        
+
         $this->factory = $factory;
     }
-    
-    /**
-     * Create the connection instance.
-     *
-     * @param array $config
-     *
-     * @return \GitWrapper\GitWrapper
-     */
-    protected function createConnection(array $config)
-    {
-        return $this->factory->make($config);
-    }
-    
-    /**
-     * Get the configuration name.
-     *
-     * @return string
-     */
-    protected function getConfigName()
-    {
-        return 'git';
-    }
-    
+
     /**
      * Get the factory instance.
      *
@@ -59,5 +37,27 @@ class GitWrapperManager extends AbstractManager
     public function getFactory()
     {
         return $this->factory;
+    }
+
+    /**
+     * Create the connection instance.
+     *
+     * @param  array  $config
+     *
+     * @return \GitWrapper\GitWrapper
+     */
+    protected function createConnection(array $config)
+    {
+        return $this->factory->make($config);
+    }
+
+    /**
+     * Get the configuration name.
+     *
+     * @return string
+     */
+    protected function getConfigName()
+    {
+        return 'git';
     }
 }
