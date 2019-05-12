@@ -5,6 +5,9 @@ namespace CupOfTea\GitWrapper;
 use GrahamCampbell\Manager\AbstractManager;
 use Illuminate\Contracts\Config\Repository;
 
+/**
+ * @mixin \GitWrapper\GitWrapper
+ */
 class GitWrapperManager extends AbstractManager
 {
     /**
